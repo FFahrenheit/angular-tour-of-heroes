@@ -2,8 +2,11 @@
   <h2>{{hero.name | uppercase}} Detalles </h2>
   <div><span>id: </span>{{hero.id}}</div>
   <div>
-    <label for="hero-name">Nombre del héreo: </label>
+    <label for="hero-name">Nombre del héroe: </label>
     <input id="hero-name" [(ngModel)]="hero.name" placeholder="Hero name" />
+    <br>
+    <label for="hero-name">Puntaje del héroe: </label>
+    <input id="hero-name" [(ngModel)]="hero.score" placeholder="Hero score" />
   </div>
   <button (click)="goBack()">Regresar</button>
   <button (click)="save()">Guardar</button>

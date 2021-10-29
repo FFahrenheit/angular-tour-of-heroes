@@ -25,6 +25,7 @@ export class HeroService {
     return this.http.get<Hero[]>(this.heroesUrl)
       .pipe(
         tap(_ => this.log('fetched heroes')),
+        map(res => res.sort(this.sortFunction)),
         catchError(this.handleError<Hero[]>('getHeroes', []))
       );
   }
@@ -62,8 +63,18 @@ export class HeroService {
       tap(x => x.length ?
         this.log(`found heroes matching "${term}"`) :
         this.log(`no heroes matching "${term}"`)),
+      map(res => res.sort(this.sortFunction)),
       catchError(this.handleError<Hero[]>('searchHeroes', []))
     );
+  }
+
+  private sortFunction(a:Hero, b:Hero){
+    if(a.score > b.score){
+      return -1;
+    }else if(a.score < b.score){
+      return 1;
+    }
+    return 0;
   }
 
   //////// Save methods //////////
